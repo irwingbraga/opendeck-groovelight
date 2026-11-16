@@ -1,0 +1,68 @@
+{
+	"Name": "Groovelight",
+	"Description": "Control Groovelight, the music player: play and pause, skip, see what is playing with its cover, and play a playlist, an album, an artist or the Album of the Day with one key",
+	"Author": "Irwing Braga",
+	"Version": "0.1.0",
+	"SDKVersion": 2,
+	"CodePath": "main.js",
+	"Icon": "icons/plugin",
+	"Category": "Groovelight",
+	"CategoryIcon": "icons/category",
+	"OS": [
+		{ "Platform": "mac", "MinimumVersion": "15" },
+		{ "Platform": "windows", "MinimumVersion": "10" }
+	],
+	"Nodejs": { "Version": "22" },
+	"Actions": [
+		{
+			"Name": "Play / Pause",
+			"UUID": "dev.irwingbraga.groovelight.deck.playpause",
+			"Icon": "icons/playpause",
+			"Tooltip": "Play or pause. Shows the play state over the cover of the song.",
+			"Controllers": ["Keypad"],
+			"States": [{ "Image": "icons/playpause", "ShowTitle": false }]
+		},
+		{
+			"Name": "Next",
+			"UUID": "dev.irwingbraga.groovelight.deck.next",
+			"Icon": "icons/next",
+			"Tooltip": "Skip to the next song.",
+			"Controllers": ["Keypad"],
+			"States": [{ "Image": "icons/next", "ShowTitle": false }]
+		},
+		{
+			"Name": "Previous",
+			"UUID": "dev.irwingbraga.groovelight.deck.previous",
+			"Icon": "icons/previous",
+			"Tooltip": "Go back to the previous song.",
+			"Controllers": ["Keypad"],
+			"States": [{ "Image": "icons/previous", "ShowTitle": false }]
+		},
+		{
+			"Name": "Now Playing",
+			"UUID": "dev.irwingbraga.groovelight.deck.nowplaying",
+			"Icon": "icons/nowplaying",
+			"Tooltip": "The cover, title and artist of the song playing. Press to play or pause.",
+			"Controllers": ["Keypad"],
+			"States": [{ "Image": "icons/nowplaying", "ShowTitle": false }]
+		},
+		{
+			"Name": "Play",
+			"UUID": "dev.irwingbraga.groovelight.deck.play",
+			"Icon": "icons/play",
+			"Tooltip": "Play a playlist, an album, an artist or what a search finds, shuffled if you like.",
+			"Controllers": ["Keypad"],
+			"States": [{ "Image": "icons/play", "ShowTitle": false }],
+			"PropertyInspectorPath": "propertyInspector/play.html"
+		},
+		{
+			"Name": "Album of the Day",
+			"UUID": "dev.irwingbraga.groovelight.deck.today",
+			"Icon": "icons/today",
+			"Tooltip": "Home's Album (or Song, or Artist) of the Day, with its cover. Press to play it.",
+			"Controllers": ["Keypad"],
+			"States": [{ "Image": "icons/today", "ShowTitle": false }],
+			"PropertyInspectorPath": "propertyInspector/today.html"
+		}
+	]
+}

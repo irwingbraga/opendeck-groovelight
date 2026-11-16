@@ -1,0 +1,53 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="style.css"></head><body>
+<label for="kind">Play</label>
+<select id="kind" data-setting="kind">
+	<option value="playlist">A playlist</option>
+	<option value="album">An album</option>
+	<option value="artist">An artist</option>
+	<option value="search">What a search finds</option>
+</select>
+
+<div data-for="playlist">
+	<label for="playlist">Playlist</label>
+	<select id="playlist" data-setting="playlist"></select>
+	<button id="refresh">Refresh playlists</button>
+</div>
+<div data-for="album">
+	<label for="album">Album</label>
+	<input id="album" type="text" data-setting="album" placeholder="Kid A">
+</div>
+<div data-for="album artist">
+	<label for="artist">Artist</label>
+	<input id="artist" type="text" data-setting="artist" placeholder="Radiohead">
+</div>
+<div data-for="search">
+	<label for="query">Search</label>
+	<input id="query" type="text" data-setting="query" placeholder="karma police">
+</div>
+
+<label class="check"><input type="checkbox" data-setting="shuffle"> Shuffle</label>
+<label class="check"><input type="checkbox" data-setting="showCover" checked> Show the cover</label>
+<label for="label">Key label</label>
+<input id="label" type="text" data-setting="label" placeholder="The name above">
+<small id="note">Names match ignoring case and accents, and part of a name is enough when only one thing matches. For an album, add the artist when several albums share the title.</small>
+<script src="common.js"></script>
+<script>
+function show() {
+	const kind = settings.kind || "playlist";
+	document.querySelectorAll("[data-for]").forEach((el) => el.classList.toggle("hidden", !el.dataset.for.split(" ").includes(kind)));
+}
+function fillPlaylists(names, error) {
+	const select = document.getElementById("playlist");
+	select.innerHTML = "";
+	select.add(new Option(error ? "(" + error + ")" : names.length ? "Choose a playlist" : "(no playlists)", ""));
+	for (const name of names) select.add(new Option(name, name));
+	if (settings.playlist && !names.includes(settings.playlist)) select.add(new Option(settings.playlist, settings.playlist));
+	select.value = settings.playlist || "";
+}
+handlers.push((payload) => { if (payload.event === "playlists") fillPlaylists(payload.playlists || [], payload.error); });
+document.addEventListener("settingsload", () => { show(); fillPlaylists([], null); toPlugin({ event: "getPlaylists" }); });
+document.addEventListener("settingschange", show);
+document.getElementById("refresh").onclick = () => toPlugin({ event: "getPlaylists" });
+</script>
+</body></html>

@@ -1,0 +1,7 @@
+body { font: 13px -apple-system, "Segoe UI", sans-serif; color: #ddd; background: #2d2d2d; padding: 12px; margin: 0; }
+label { display: block; margin: 10px 0 4px; }
+label.check { display: flex; gap: 6px; align-items: center; }
+select, input[type=text] { width: 100%; box-sizing: border-box; padding: 4px; }
+button { margin-top: 6px; padding: 4px 10px; }
+small { display: block; margin-top: 10px; color: #999; line-height: 1.4; }
+.hidden { display: none; }
